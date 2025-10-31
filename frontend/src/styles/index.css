@@ -1,0 +1,19 @@
+body {
+  /* min-height: 100vh; */
+  margin: 0;
+  padding: 20px;
+  font-size: 20px;
+  box-sizing: border-box; /* Padding included in height calculation */
+  background-color: #000000;
+  color: #ebebeb;
+  font-family: Arial, sans-serif;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  /* min-height: 100vh; */
+}

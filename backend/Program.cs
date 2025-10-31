@@ -1,3 +1,4 @@
+using Backend.Drivers;
 using Backend.Scrapers;
 using Backend.Services;
 
@@ -27,10 +28,27 @@ var app = builder.Build();
 
 app.UseCors("AllowReact");
 
+
+// Initialize all drivers on startup
+Console.WriteLine("Initializing drivers...");
+var driverTasks = new[]
+{
+    Task.Run(() => SeleniumDriver.InitializeYtsDriver()),
+    Task.Run(() => SeleniumDriver.InitializeRarbgDriver()),
+    //Task.Run(() => SeleniumDriver.InitializeTestDriver())
+};
+await Task.WhenAll(driverTasks);
+Console.WriteLine("All drivers ready!");
+
+
 // Map controllers
 app.MapControllers();
 
 // Status
 app.MapGet("/api/status", () => new { message = true });
+
+// Close drivers on shutdown
+var lifetime = app.Services.GetRequiredService<IHostApplicationLifetime>();
+lifetime.ApplicationStopping.Register(() => SeleniumDriver.CloseAllDrivers());
 
 app.Run();

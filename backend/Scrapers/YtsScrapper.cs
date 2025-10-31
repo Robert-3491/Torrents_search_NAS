@@ -1,22 +1,25 @@
 using System.Net;
+using Backend.Drivers;
 using Backend.Models.Responses;
 using Backend.Models.YtsModels;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 
 namespace Backend.Scrapers{
 
-public class YtsScrapper : IDisposable
-{
-    private readonly IWebDriver _driver;
+    public class YtsScrapper : IDisposable
+    {
+        private readonly ChromeDriver _driver;
 
-    public YtsScrapper()
+        public YtsScrapper()
         {
-             _driver = SeleniumDriver.CreateNewDriver();
+            _driver = SeleniumDriver.GetYtsDriver();
         }
+
         public YtsResponse ScrapeYTS(string query)
         {
             Console.WriteLine("Search start YTS");
-           
+
 
             var queryUrl = WebUtility.UrlEncode(query);
             var ytsResponse = new YtsResponse();
@@ -65,16 +68,15 @@ public class YtsScrapper : IDisposable
                 // RemoveLowQuality option for each movie (if 1080 available)
                 RemoveLowQuality(ytsMovie);
             }
-            Dispose();
             Console.WriteLine($"Search end YTS, result count: {ytsResponse.YTSmovies.Count}");
             return ytsResponse;
         }
-        
+
         // fuzzy matching - check if all words are present
-        public bool TitleIncludesQuery (YTSmovie movie , string query)
+        public bool TitleIncludesQuery(YTSmovie movie, string query)
         {
             string titleYearJoined = $"{movie.Title} {movie.Year}";
-                var queryWords = query.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            var queryWords = query.Split(' ', StringSplitOptions.RemoveEmptyEntries);
             if (queryWords.All(word => titleYearJoined.Contains(word, StringComparison.CurrentCultureIgnoreCase)))
             {
                 return true;
@@ -90,10 +92,9 @@ public class YtsScrapper : IDisposable
             return movie;
         }
 
-        public void Dispose()
-        {
-            _driver?.Quit();
-            _driver?.Dispose();
-        }
-}
+    public void Dispose()
+    {
+    }
+
+    }
 }

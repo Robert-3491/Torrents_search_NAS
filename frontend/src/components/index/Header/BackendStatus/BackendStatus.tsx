@@ -5,9 +5,20 @@ export default function BackendStatus() {
   const [backendStatus, setBackendStatus] = useState<boolean>(false);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/status")
-      .then((response) => response.json())
-      .then((data) => setBackendStatus(data.message));
+    const checkBackend = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/status");
+        const data = await response.json();
+        setBackendStatus(data.message);
+      } catch (error) {
+        console.log("Backend not reachable:", error);
+        setBackendStatus(false);
+        // Retry after 1 second
+        setTimeout(checkBackend, 1000);
+      }
+    };
+
+    checkBackend();
   }, []);
 
   return <p id={styles.backendStatus}>{backendStatus ? "🟢" : "🔴"}</p>;

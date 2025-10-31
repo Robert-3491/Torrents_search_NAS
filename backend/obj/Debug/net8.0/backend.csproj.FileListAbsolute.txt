@@ -31,3 +31,4 @@ C:\Users\PC\Desktop\React\Torrents_search_NAS\backend\bin\Debug\net8.0\runtimes\
 C:\Users\PC\Desktop\React\Torrents_search_NAS\backend\obj\Debug\net8.0\backend.csproj.AssemblyReference.cache
 C:\Users\PC\Desktop\React\Torrents_search_NAS\backend\obj\Debug\net8.0\backend.csproj.Up2Date
 C:\Users\PC\Desktop\React\Torrents_search_NAS\backend\bin\Debug\net8.0\SeleniumExtras.WaitHelpers.dll
+C:\Users\PC\Desktop\React\Torrents_search_NAS\backend\obj\Debug\net8.0\backend.sourcelink.json

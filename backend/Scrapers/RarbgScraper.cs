@@ -1,8 +1,10 @@
 using System.Diagnostics;
 using System.Net;
+using Backend.Drivers;
 using Backend.Models;
 using Backend.Models.Responses;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 
@@ -11,11 +13,11 @@ namespace Backend.Scrapers
 
    public class RarbgScraper : IDisposable
 {
-    private IWebDriver _driver;
+    private ChromeDriver _driver;
 
     public RarbgScraper()
     {
-        _driver = SeleniumDriver.CreateNewDriver();
+        _driver = SeleniumDriver.GetRarbgDriver();
     }
         public GenericResponse RarbgtScraper(string query, bool isMovieSearch)
         {
@@ -58,15 +60,12 @@ namespace Backend.Scrapers
                 rarbgMovie.MagnetUrl = magnetElement.GetAttribute("href");
             }
             Console.WriteLine($"Search end RARBG \nResult count RARBG: {genericResponse.GenericMovies.Count}");
-            Dispose();
 
             return genericResponse;
         }
 
         public void Dispose()
         {
-            _driver?.Quit();
-            _driver?.Dispose();
         }
     }
 }

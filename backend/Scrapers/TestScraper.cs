@@ -1,8 +1,10 @@
 using System.Net;
+using Backend.Drivers;
 using Backend.Models;
 using Backend.Models.Responses;
 using Backend.Models.YtsModels;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 
@@ -11,11 +13,11 @@ namespace Backend.Scrapers
 
     public class TestScraper : IDisposable
     {
-        private readonly IWebDriver? _driver;
+        private readonly ChromeDriver? _driver;
 
         public TestScraper()
         {
-            _driver = SeleniumDriver.CreateNewDriver();
+            _driver = SeleniumDriver.GetYtsDriver();
         }
 
 
@@ -56,7 +58,6 @@ namespace Backend.Scrapers
             }
 
             System.Console.WriteLine("------------------------------------------------------------------------");
-            Dispose();
             watch.Stop();
             double elapsedSec = watch.ElapsedMilliseconds / 1000.0;
             System.Console.WriteLine($"Execution time: {elapsedSec}");
@@ -65,8 +66,6 @@ namespace Backend.Scrapers
 
         public void Dispose()
         {
-            _driver?.Quit();
-            _driver?.Dispose();
         }
     }
 }

@@ -1,0 +1,73 @@
+.container {
+  width: 100%;
+  margin-top: 2rem;
+  background-color: #232323;
+  border-radius: 15px;
+  padding: 1% 2%;
+}
+
+.movieList {
+  display: flex;
+  overflow-x: auto;
+  gap: 25px;
+  padding: 10px 0px;
+  scroll-behavior: smooth;
+}
+
+.movieList::-webkit-scrollbar {
+  height: 10px;
+}
+
+.movieList::-webkit-scrollbar-track {
+  background: #303030;
+  border-radius: 10px;
+}
+
+.movieList::-webkit-scrollbar-thumb {
+  background: #a8a8a8;
+  border-radius: 10px;
+}
+
+.movieList::-webkit-scrollbar-thumb:hover {
+  background: #c7c7c7;
+  cursor: pointer;
+}
+
+.movieCard {
+  width: 200px;
+  min-width: 200px;
+  height: 300px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 15px;
+  border: 2px solid #2c6b14;
+  transition: 0.2s;
+}
+
+.movieCard:hover {
+  box-shadow: 0px 0px 6px 0px #ebebeb;
+  border: 2px solid #ebebeb;
+  cursor: pointer;
+}
+
+.cardWrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  transition: 0.2s;
+}
+
+.cardWrapper:hover {
+  background-color: #00000045;
+}
+
+.title {
+  background-color: #000000c9;
+  padding: 4% 2%;
+  width: 100%;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  text-align: center;
+  align-self: flex-end;
+}

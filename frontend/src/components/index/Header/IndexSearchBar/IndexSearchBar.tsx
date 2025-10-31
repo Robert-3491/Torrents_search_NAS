@@ -2,6 +2,7 @@ import { useState } from "react";
 import styles from "./IndexSearchBar.module.css";
 import { HiOutlineClipboardCopy } from "react-icons/hi";
 import { HiSearch } from "react-icons/hi";
+import { useYtsMovies } from "@/context/YtsMoviesContext";
 
 interface Props {
   isMovieSearch: boolean;
@@ -9,6 +10,7 @@ interface Props {
 
 export default function IndexSearchBar({ isMovieSearch }: Props) {
   const [searchQuery, setSearchQuery] = useState("");
+  const { setYtsMovies } = useYtsMovies();
 
   const handlePaste = async () => {
     const text = await navigator.clipboard.readText();
@@ -28,6 +30,7 @@ export default function IndexSearchBar({ isMovieSearch }: Props) {
       }),
     });
     const data = await response.json();
+    setYtsMovies(data.ytsMovies);
     console.log(data);
   };
 

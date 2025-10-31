@@ -1,12 +1,13 @@
 body {
   /* min-height: 100vh; */
   margin: 0;
-  padding: 20px;
   font-size: 20px;
   box-sizing: border-box; /* Padding included in height calculation */
   background-color: #000000;
   color: #ebebeb;
   font-family: Arial, sans-serif;
+  width: 100%;
+  padding: 1% 20% 0% 20%;
 }
 
 html {

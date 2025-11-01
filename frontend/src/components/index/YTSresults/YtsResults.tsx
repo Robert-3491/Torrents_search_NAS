@@ -1,6 +1,7 @@
 import { useYtsMovies } from "@/context/YtsMoviesContext";
 import styles from "./YtsResults.module.css";
 import { useRef } from "react";
+import { BiSolidDownload } from "react-icons/bi";
 
 interface YTSquality {
   quality: string;
@@ -31,7 +32,7 @@ function YtsResults() {
       <h3>YTS Results</h3>
 
       <div className={styles.movieList} ref={scrollRef} onWheel={handleWheel}>
-        {ytsMovies.length > 0 ? (
+        {ytsMovies && ytsMovies.lenght > 0 ? (
           ytsMovies.map((movie: YTSmovie, index: number) => (
             <div
               key={index}
@@ -39,6 +40,7 @@ function YtsResults() {
               style={{ backgroundImage: `url(${movie.imageURL})` }}
             >
               <div className={styles.cardWrapper}>
+                <BiSolidDownload className={styles.downloadIcon} />
                 <div className={styles.title}>
                   {movie.title} ({movie.year})
                 </div>

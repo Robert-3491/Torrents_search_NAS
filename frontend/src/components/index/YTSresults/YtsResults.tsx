@@ -23,7 +23,7 @@ function YtsResults() {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const handleWheel = (e: React.WheelEvent) => {
-    e.preventDefault();
+    //e.preventDefault();
     scrollRef.current!.scrollLeft += e.deltaY;
   };
 
@@ -32,7 +32,7 @@ function YtsResults() {
       <h3>YTS Results</h3>
 
       <div className={styles.movieList} ref={scrollRef} onWheel={handleWheel}>
-        {ytsMovies && ytsMovies.lenght > 0 ? (
+        {ytsMovies && ytsMovies.length > 0 ? (
           ytsMovies.map((movie: YTSmovie, index: number) => (
             <div
               key={index}

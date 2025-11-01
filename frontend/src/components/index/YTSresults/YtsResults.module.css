@@ -11,6 +11,7 @@
   overflow-x: auto;
   gap: 25px;
   padding: 10px 0px;
+  /* scroll-behavior: smooth; */
 }
 
 .movieList::-webkit-scrollbar {

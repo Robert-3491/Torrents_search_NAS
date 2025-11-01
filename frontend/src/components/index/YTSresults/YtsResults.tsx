@@ -1,6 +1,6 @@
 import { useYtsMovies } from "@/context/YtsMoviesContext";
 import styles from "./YtsResults.module.css";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { BiSolidDownload } from "react-icons/bi";
 
 interface YTSquality {
@@ -22,16 +22,22 @@ function YtsResults() {
   const { ytsMovies } = useYtsMovies();
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  const handleWheel = (e: React.WheelEvent) => {
-    //e.preventDefault();
-    scrollRef.current!.scrollLeft += e.deltaY;
-  };
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const handle = (e: WheelEvent) => {
+      e.preventDefault();
+      el.scrollLeft += e.deltaY;
+    };
+    el.addEventListener("wheel", handle, { passive: false });
+    return () => el.removeEventListener("wheel", handle);
+  }, []);
 
   return (
     <div className={styles.container}>
       <h3>YTS Results</h3>
 
-      <div className={styles.movieList} ref={scrollRef} onWheel={handleWheel}>
+      <div className={styles.movieList} ref={scrollRef}>
         {ytsMovies && ytsMovies.length > 0 ? (
           ytsMovies.map((movie: YTSmovie, index: number) => (
             <div

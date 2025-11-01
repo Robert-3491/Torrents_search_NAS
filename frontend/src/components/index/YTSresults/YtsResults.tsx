@@ -1,22 +1,8 @@
 import { useYtsMovies } from "@/context/YtsMoviesContext";
 import styles from "./YtsResults.module.css";
 import { useRef, useEffect } from "react";
-import { BiSolidDownload } from "react-icons/bi";
-
-interface YTSquality {
-  quality: string;
-  qualityType: string;
-  size: string;
-  magnetURL: string;
-}
-
-interface YTSmovie {
-  title: string;
-  imageURL: string;
-  year: string;
-  moviePageUrl: string;
-  qualities: YTSquality[];
-}
+import QualitiesList from "./QualitiesList/QualitiesList";
+import { YTSmovie } from "@/types/ytsMovies";
 
 function YtsResults() {
   const { ytsMovies } = useYtsMovies();
@@ -46,7 +32,9 @@ function YtsResults() {
               style={{ backgroundImage: `url(${movie.imageURL})` }}
             >
               <div className={styles.cardWrapper}>
-                <BiSolidDownload className={styles.downloadIcon} />
+                <div className={styles.qualitiesWrap}>
+                  <QualitiesList qualities={movie.qualities} />
+                </div>
                 <div className={styles.title}>
                   {movie.title} ({movie.year})
                 </div>
